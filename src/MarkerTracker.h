@@ -18,7 +18,7 @@
 
 typedef enum {
     MODE_PRE_CAMERA,
-    MODE_BACKGROUND_CAP,
+    MODE_PRE_CALIBRATION,
     MODE_CALIBRATION,
     MODE_POST_CALIBRATION
 } MarkerTrackerMode;
@@ -36,6 +36,8 @@ public:
     
     void captureBackground();
     void calibrate();
+    
+    bool bCalibrated;
     
 private:
     MarkerTrackerMode mode;

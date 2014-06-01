@@ -8,7 +8,7 @@
 
 #include "MarkerTracker.h"
 
-MarkerTracker::MarkerTracker() : mode(MODE_PRE_CAMERA)
+MarkerTracker::MarkerTracker() : mode(MODE_PRE_CAMERA), bCalibrated(false)
 {
     
 }
@@ -29,7 +29,7 @@ void MarkerTracker::setup()
     destCorners.push_back(ofVec2f(1, 0));
     destCorners.push_back(ofVec2f(1, 1));
     
-    mode = MODE_BACKGROUND_CAP;
+    mode = MODE_PRE_CALIBRATION;
 }
 
 void MarkerTracker::update()
@@ -109,9 +109,8 @@ void MarkerTracker::draw()
     if (mode == MODE_PRE_CAMERA) {
         ofDrawBitmapString("Could not connect to camera", 0, 0);
     }
-    else if (mode == MODE_BACKGROUND_CAP) {
-        ofDrawBitmapString("Capture Background", 0, 0);
-        ofDrawBitmapString("Click on the screen to capture the background", 0, 20);
+    else if (mode == MODE_PRE_CALIBRATION) {
+        ofDrawBitmapString("System not calibrated", 0, 0);
     }
     else if (mode == MODE_CALIBRATION) {
         ofDrawBitmapString("Calibration", 0, 0);
@@ -135,8 +134,13 @@ void MarkerTracker::draw()
     
     // draw transformations
     ofPushMatrix();
+    ofTranslate(0, 20);
     ofScale(0.20, 0.20);
-    
+
+    ofSetColor(0);
+    ofDrawBitmapString("Grayscale", 0, -15);
+    ofDrawBitmapString("Background Subtraction", camera.frameSize.x + 20, -15);
+    ofDrawBitmapString("Threshold", camera.frameSize.x*2 + 40, -15);
     ofSetColor(255);
     graySource.draw(0, 0);
     backgroundSub.draw(camera.frameSize.x + 20, 0);
@@ -147,9 +151,8 @@ void MarkerTracker::draw()
 
     // draw transformed canvas
     ofSetColor(0);
-    ofTranslate(camera.frameSize.x - camera.frameSize.x/3, 10);
-    ofDrawBitmapString("Normalized", 0, 0);
-    ofTranslate(0, 10);
+    ofTranslate(camera.frameSize.x - camera.frameSize.x/3, 20);
+    ofDrawBitmapString("Normalized Marker Position", 0, -3);
     ofScale(0.3, 0.3);
     ofSetColor(50);
     ofFill();
@@ -166,23 +169,13 @@ void MarkerTracker::draw()
 
 void MarkerTracker::mousePressed(float x, float y)
 {
-    if (
-        !
-        (mode == MODE_CALIBRATION ||
-        mode == MODE_BACKGROUND_CAP)) {
-        return;
-    }
-    
-    if (mode == MODE_BACKGROUND_CAP) {
-        captureBackground();
-        mode = MODE_CALIBRATION;
-    }
-    else if (mode == MODE_CALIBRATION) {
+    if (mode == MODE_CALIBRATION) {
         corners.push_back(ofVec2f(x, y) + camToScreenTrans);
         if (corners.size() >= 4) {
             
             cv::Mat mat = PerspectiveTransform::getTransformationMatrix(corners, destCorners);
             pTransform.setup(mat);
+            bCalibrated = true;
             mode = MODE_POST_CALIBRATION;
         }
     }
@@ -196,6 +189,7 @@ void MarkerTracker::captureBackground()
 
 void MarkerTracker::calibrate()
 {
+    bCalibrated = false;
     mode = MODE_CALIBRATION;
     corners.clear();
 }
