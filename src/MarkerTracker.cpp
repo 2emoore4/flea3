@@ -36,6 +36,10 @@ void MarkerTracker::update()
 {
     camera.update();
     
+    if (!camera.bInitialized) {
+        return;
+    }
+    
     cvCvtColor(camera.camImg.getCvImage(), graySource.getCvImage(), CV_RGB2GRAY);
     graySource.flagImageChanged();
     
@@ -149,7 +153,7 @@ void MarkerTracker::draw()
     
     ofPopMatrix();
 
-    // draw transformed canvas
+    // draw markers position
     ofSetColor(0);
     ofTranslate(camera.frameSize.x - camera.frameSize.x/3, 20);
     ofDrawBitmapString("Normalized Marker Position", 0, -3);

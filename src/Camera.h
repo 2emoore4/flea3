@@ -33,8 +33,9 @@ public:
     
     ofxCvColorImage camImg;
 
-private:
     bool bInitialized;
+
+private:
     unsigned int imgWidth, imgHeight;
     ofxCvGrayscaleImage cvRaw8Img;
     
