@@ -15,7 +15,7 @@ MarkerTracker::MarkerTracker() : mode(MODE_PRE_CAMERA), bCalibrated(false)
 
 void MarkerTracker::setup()
 {
-    if (!camera.setup()) {
+    if (!camera.setup() || !wsServer.setup()) {
         return;
     }
     
