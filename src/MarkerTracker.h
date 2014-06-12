@@ -12,11 +12,9 @@
 #include <iostream>
 #include "ofMain.h"
 #include "ofxOpenCv.h"
-#include "ofxLibwebsockets.h"
 
 #include "Camera.h"
 #include "PerspectiveTransform.h"
-#include "WSServer.h"
 
 typedef enum {
     MODE_PRE_CAMERA,
@@ -46,7 +44,6 @@ private:
     
     Camera camera;
     PerspectiveTransform pTransform;
-    WSServer wsServer;
     
     ofVec2f camToScreenTrans;
     vector<ofVec2f> corners;
