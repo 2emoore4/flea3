@@ -1057,14 +1057,6 @@
 					../../../addons/ofxSyphon/libs/Syphon/lib/osx/Syphon.framework/Versions/Current/Resources/English.lproj,
 					../../../addons/ofxSyphon/libs/Syphon/src,
 					../../../addons/ofxSyphon/src,
-					../../../addons/ofxLibwebsockets/src,
-					../../../addons/ofxLibwebsockets/libs/ofxLibwebsockets/src,
-					../../../addons/ofxLibwebsockets/libs/ofxLibwebsockets/include/ofxLibwebsockets,
-					../../../addons/ofxLibwebsockets/libs/ofxLibwebsockets/include,
-					../../../addons/ofxLibwebsockets/libs/openssl/openssl,
-					../../../addons/ofxLibwebsockets/libs/libwebsockets/include/,
-					../../../addons/ofxLibwebsockets/libs/jsoncpp/json,
-					../../../addons/ofxLibwebsockets/libs/jsoncpp,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
@@ -1157,14 +1149,6 @@
 					../../../addons/ofxSyphon/libs/Syphon/lib/osx/Syphon.framework/Versions/Current/Resources/English.lproj,
 					../../../addons/ofxSyphon/libs/Syphon/src,
 					../../../addons/ofxSyphon/src,
-					../../../addons/ofxLibwebsockets/src,
-					../../../addons/ofxLibwebsockets/libs/ofxLibwebsockets/src,
-					../../../addons/ofxLibwebsockets/libs/ofxLibwebsockets/include/ofxLibwebsockets,
-					../../../addons/ofxLibwebsockets/libs/ofxLibwebsockets/include,
-					../../../addons/ofxLibwebsockets/libs/openssl/openssl,
-					../../../addons/ofxLibwebsockets/libs/libwebsockets/include/,
-					../../../addons/ofxLibwebsockets/libs/jsoncpp/json,
-					../../../addons/ofxLibwebsockets/libs/jsoncpp,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
